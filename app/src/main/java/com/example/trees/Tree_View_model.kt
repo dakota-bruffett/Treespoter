@@ -15,7 +15,7 @@ class Tree_View_model:ViewModel() {
     val latestTree= MutableLiveData<List<Tree>>()
 
     private val latestTreeListener =  treeCollectionRefernce
-        .orderBy("dataSpotted",Query.Direction.DESCENDING)
+      //  .orderBy("dataSpotted",Query.Direction.DESCENDING)
         .limit(10)
         .addSnapshotListener{snapshot,error ->
             if (error != null){

@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
-    id 'org.google.android.libraries.mapsplatform.secerts-gradle-plugin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 apply plugin: "com.google.gms.google-services"
 
