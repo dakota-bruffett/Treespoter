@@ -4,18 +4,18 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.core.Query
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class Tree_View_model:ViewModel() {
     private val db = Firebase.firestore
-    private val treeCollectionRefernce = db.collection("trees")
+    private val treeCollectionReference = db.collection("trees")
 
     val latestTree= MutableLiveData<List<Tree>>()
 
-    private val latestTreeListener =  treeCollectionRefernce
-      //  .orderBy("dataSpotted",Query.Direction.DESCENDING)
+    private val latestTreeListener =  treeCollectionReference
+       .orderBy("dataSpotted", Query.Direction.DESCENDING)
         .limit(10)
         .addSnapshotListener{snapshot,error ->
             if (error != null){
@@ -37,4 +37,14 @@ class Tree_View_model:ViewModel() {
     }
 
         }
+    fun addTree(tree: Tree){
+        treeCollectionReference.add(tree)
+            .addOnSuccessListener { treedocumentReference ->
+                Log.d(TAG,"new Tree added at ${treedocumentReference.path}")
+            }
+            .addOnFailureListener{error->
+                Log.e(TAG, "Error adding Trees $tree,$error")
+            }
+    }
+
 }
